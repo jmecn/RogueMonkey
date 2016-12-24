@@ -17,30 +17,6 @@ targetCompatibility = 1.6
 
 def slf4jVersion = '1.7.21'
 
-sourceSets {
-    main {
-        java {
-            srcDir 'Core/src/main/java'
-            srcDir 'SwingGui/src/main/java'
-            srcDir 'MapGenerator/src/main/java'
-            srcDir 'Tiled/src/main/java'
-        }
-        
-        resources {
-            srcDir 'Core/src/main/resources'
-            srcDir 'SwingGui/src/main/resources'
-            srcDir 'MapGenerator/src/main/resources'
-            srcDir 'Tiled/src/main/resources'
-        }
-    }
-    
-    test {
-        java {
-            srcDir 'core/src/test/java'
-        }
-    }
-}
-
 repositories {
     jcenter()
     mavenCentral()  
@@ -55,7 +31,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class' : 'net.jmecn.roguemonkey.gui.UI'
+        attributes 'Main-Class' : 'net.jmecn.rogue.Main'
     }
     
     // this will add all the dependent jars into the generated-jar package
