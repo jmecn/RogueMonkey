@@ -10,6 +10,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
+import javax.swing.UIManager;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,14 +40,14 @@ public class Main implements Runnable {
 	private GameView view;
 	private InputListener listener;
 
-	ExecutorService exec = Executors.newFixedThreadPool(1);
+	private ExecutorService exec;
 
 	public Main() {
 		timer = new NanoTimer();
 		game = new Game();
 		view = new GameView();
 
-		listener = new InputListener(view);
+		listener = new InputListener();
 		view.addKeyListener(listener);
 
 		services = new ArrayList<Service>();
@@ -55,6 +56,13 @@ public class Main implements Runnable {
 	}
 
 	private void createFrame() {
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception e) {
+			logger.warn("Could not set native look and feel.");
+		}
+		
 		JFrame frame = new JFrame("Rogue Monkey");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setResizable(false);
@@ -107,10 +115,11 @@ public class Main implements Runnable {
 		createFrame();
 
 		// 启动主线程
+		exec = Executors.newFixedThreadPool(1);
 		exec.execute(this);
-
 		started = true;
 		enabled = true;
+		
 		logger.info("开始游戏");
 	}
 
@@ -121,6 +130,9 @@ public class Main implements Runnable {
 
 		// 关闭主线程
 		exec.shutdown();
+		exec = null;
+		started = false;
+		enabled = false;
 
 		// 逆序清理所有的服务
 		int len = services.size();
@@ -128,8 +140,6 @@ public class Main implements Runnable {
 			Service s = services.get(i);
 			s.terminate(game);
 		}
-		started = false;
-		enabled = false;
 		logger.info("游戏结束");
 	}
 

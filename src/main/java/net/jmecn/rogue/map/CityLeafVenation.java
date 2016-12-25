@@ -394,6 +394,8 @@ public class CityLeafVenation extends MapCreator {
 				drawLine(root_x, root_y, x, y, Corridor);
 			}
 		}
+		
+		map.set(width/2, height/2, DownStairs);
 	}
 	
 	private void drawLine(int x1, int y1, int x2, int y2, int tile) {

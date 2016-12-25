@@ -5,10 +5,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.jmecn.rogue.core.Map;
 
 public class MapFactory {
 
+	static Logger logger = LoggerFactory.getLogger(MapFactory.class);
+	
 	Random rand = new Random();
 	// MapCreater base
 	private List<MapCreator> mapCreators;
@@ -20,10 +25,10 @@ public class MapFactory {
 	private boolean isRand;
 	
 	public MapFactory() {
-		width = 40;
-		height = 30;
+		width = 41;
+		height = 41;
 		seed = md5("yan");
-		isRand = false;
+		isRand = true;
 		
 		mapCreators = new ArrayList<MapCreator>();
 		mapCreators.add(new ForestHauberk(width, height));
@@ -33,8 +38,6 @@ public class MapFactory {
 		mapCreators.add(new DungeonHauberk(width, height));
 		mapCreators.add(new DungeonTyrant(width, height));
 		mapCreators.add(new Maze(width, height));
-		mapCreators.add(new MazeWilson(width, height));
-		mapCreators.add(new Islands(width, height));
 		mapCreators.add(new Building(width, height));
 		mapCreators.add(new CityLeafVenation(width, height));
 		creatorCnt= mapCreators.size();
@@ -52,6 +55,7 @@ public class MapFactory {
 		creator.initialze();
 		creator.create();
 		
+		logger.debug("Create map with : {}", creator);
 		return creator.getMap();
 	}
 	

@@ -47,7 +47,7 @@ public class Maze extends MapCreator {
 	private int cellRows;
 	private int cellCnt;
 	
-	private static int ROAD_SIZE = 2;
+	private static int ROAD_SIZE = 4;
 	
 	public Maze(int width, int height) {
 		super("creator.maze", width * ROAD_SIZE + 1, height * ROAD_SIZE + 1);
@@ -83,8 +83,8 @@ public class Maze extends MapCreator {
 				maze[y][x] = new Cell();
 			}
 		}
-		maze[0][0].door[West] = true;
-		maze[cellRows - 1][cellCols - 1].door[East] = true;
+		//maze[0][0].door[West] = true;
+		//maze[cellRows - 1][cellCols - 1].door[East] = true;
 
 		this.cellCnt = cellCols * cellRows;
 		this.cells = new int[cellCnt];
@@ -97,6 +97,8 @@ public class Maze extends MapCreator {
 	public void create() {
 		buildMaze();
 		buildTile();
+		map.set(1, 1, Tile.UpStairs);
+		map.set(cellRows-2, cellCols, Tile.DownStairs);
 	}
 	
 	public void buildMaze() {

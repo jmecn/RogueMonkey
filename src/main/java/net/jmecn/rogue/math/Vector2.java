@@ -27,6 +27,14 @@ public class Vector2 implements Cloneable {
 		this.x = x;
 		this.y = y;
 	}
+	
+	public void set(Vector2 v) {
+		if (v == null) {
+			return;
+		}
+		this.x = v.x;
+		this.y = v.y;
+	}
 
 	public int getX() {
 		return x;
