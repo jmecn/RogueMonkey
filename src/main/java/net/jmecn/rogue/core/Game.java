@@ -5,18 +5,18 @@ import static net.jmecn.rogue.core.Tile.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.jmecn.rogue.entity.Creature;
+import net.jmecn.rogue.entity.Player;
 import net.jmecn.rogue.map.MapFactory;
 import net.jmecn.rogue.math.Vector2;
 
 public class Game {
-	Creature player;
+	Player player;
 	Map map;
 	List<Map> maps;
 	MapFactory factory;
 
 	public Game() {
-		player = new Creature();
+		player = new Player();
 		factory = new MapFactory();
 		maps = new ArrayList<Map>();
 		
@@ -39,7 +39,7 @@ public class Game {
 			}
 		}
 	}
-	public Creature getPlayer() {
+	public Player getPlayer() {
 		return player;
 	}
 
