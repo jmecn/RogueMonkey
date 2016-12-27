@@ -57,6 +57,7 @@ public class Game {
 		switch (tile) {
 		case Wall:
 		case Stone:
+		case Tree:
 		case Unused:
 			return;
 		case DownStairs:

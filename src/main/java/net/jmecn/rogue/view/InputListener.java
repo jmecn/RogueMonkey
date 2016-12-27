@@ -21,6 +21,11 @@ public class InputListener implements KeyListener, Service {
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
 		switch(code) {
+		case KeyEvent.VK_ESCAPE:
+			break;
+		case KeyEvent.VK_N:
+			game.downLevel();
+			break;
 		case KeyEvent.VK_W:
 		case KeyEvent.VK_UP:
 		case KeyEvent.VK_NUMPAD8:

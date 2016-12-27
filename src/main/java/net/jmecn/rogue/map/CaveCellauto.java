@@ -61,8 +61,22 @@ public class CaveCellauto extends MapCreator {
 				}
 			}
 		}
+		
+		placeStairs(UpStairs);
+		placeStairs(DownStairs);
 	}
 
+	private void placeStairs(int tile) {
+		// get a random start point
+		int x, y;
+		do {
+			x = nextInt(width);
+			y = nextInt(height);
+		} while (map.get(x, y) != Floor);
+		
+		map.set(x, y, tile);
+	}
+	
 	private int sum = 0;
 
 	private boolean floodFill() {

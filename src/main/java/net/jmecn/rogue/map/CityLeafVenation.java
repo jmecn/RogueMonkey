@@ -61,6 +61,9 @@ public class CityLeafVenation extends MapCreator {
 		}
 		
 		draw();
+		
+		map.set(width/2, height/2, DownStairs);
+		map.set(width/2-1, height/2, UpStairs);
 	}
 
 	private void iteration() {

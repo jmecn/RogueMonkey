@@ -133,6 +133,17 @@ public class DungeonHauberk extends MapCreator {
 
 		removeDeadEnds();
 
+		placeStairs();
+	}
+	
+	private void placeStairs() {
+		int len = rooms.size();
+		assert len >= 2;
+		Rect start = rooms.get(0);
+		Rect end = rooms.get(len-1);
+		
+		map.set(start.centerX(), start.centerY(), UpStairs);
+		map.set(end.centerX(), end.centerY(), DownStairs);
 	}
 
 	/**

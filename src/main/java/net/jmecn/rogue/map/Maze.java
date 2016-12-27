@@ -97,8 +97,14 @@ public class Maze extends MapCreator {
 	public void create() {
 		buildMaze();
 		buildTile();
-		map.set(1, 1, Tile.UpStairs);
-		map.set(cellRows-2, cellCols, Tile.DownStairs);
+		
+		// placeStairs
+		
+		map.set(ROAD_SIZE/2, ROAD_SIZE/2, Tile.UpStairs);
+		
+		int x = cellCols * ROAD_SIZE;
+		int y = cellRows * ROAD_SIZE;
+		map.set(x+ ROAD_SIZE/2, y+ROAD_SIZE/2, Tile.DownStairs);
 	}
 	
 	public void buildMaze() {

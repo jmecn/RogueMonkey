@@ -33,8 +33,22 @@ public class Building extends MapCreator {
 		buildWalls(root);
 		buildDoors(root);
 		map.buildBoundary(Wall);
+		
+		placeStairs(UpStairs);
+		placeStairs(DownStairs);
 	}
 
+	private void placeStairs(int tile) {
+		// get a random start point
+		int x, y;
+		do {
+			x = nextInt(width);
+			y = nextInt(height);
+		} while (map.get(x, y) != Floor);
+		
+		map.set(x, y, tile);
+	}
+	
 	private void buildDoors(Room room) {
 		if (room.getLeft() != null && room.getRight() != null) {
 			List<Vector2> points = new ArrayList<Vector2>();
