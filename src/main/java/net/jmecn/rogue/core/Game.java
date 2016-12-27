@@ -5,31 +5,44 @@ import static net.jmecn.rogue.core.Tile.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.jmecn.rogue.entity.Player;
 import net.jmecn.rogue.map.MapFactory;
 import net.jmecn.rogue.math.Vector2;
 
 public class Game {
-	Player player;
-	Map map;
+	
+	static Logger logger = LoggerFactory.getLogger(Game.class);
+	
+	private MapFactory factory;
+	private Map map;
 	List<Map> maps;
-	MapFactory factory;
+	int level;
+	
+	Player player;
 
 	public Game() {
 		player = new Player();
 		factory = new MapFactory();
 		maps = new ArrayList<Map>();
-		
+		level = 0;
 		downLevel();
 	}
 
 	public void downLevel() {
-		map = factory.createMap();
-		maps.add(map);
+		level++;
+		if (level > maps.size()) {
+			map = factory.createMap();
+			maps.add(map);
+		} else {
+			map = maps.get(level-1);
+		}
 		
+
 		int h = map.getHeight();
 		int w = map.getWidth();
-		
 		for(int y=0; y<h; y++) {
 			for(int x=0; x<w; x++) {
 				if (map.get(x, y) == UpStairs) {
@@ -39,6 +52,27 @@ public class Game {
 			}
 		}
 	}
+	
+	public void upLevel() {
+		if (level == 1) {
+			return;
+		}
+		
+		level--;
+		map = maps.get(level-1);
+		
+		int h = map.getHeight();
+		int w = map.getWidth();
+		for(int y=0; y<h; y++) {
+			for(int x=0; x<w; x++) {
+				if (map.get(x, y) == DownStairs) {
+					player.getLocation().set(x, y);
+					break;
+				}
+			}
+		}
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -61,9 +95,13 @@ public class Game {
 		case Unused:
 			return;
 		case DownStairs:
+			player.getLocation().set(x, y);
 			downLevel();
 			break;
 		case UpStairs:
+			player.getLocation().set(x, y);
+			upLevel();
+			break;
 		default :
 			player.getLocation().set(x, y);
 		}

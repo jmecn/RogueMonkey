@@ -4,6 +4,8 @@ public class Player extends Creature {
 
 	int gold;
 	int level;
+	int hungry;
+	int thirty;
 	
 	public Player() {
 		hp = 100;
