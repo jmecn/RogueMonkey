@@ -1,5 +1,7 @@
 package net.jmecn.rogue.entity;
 
+import java.util.LinkedList;
+
 import net.jmecn.rogue.math.Vector2;
 
 public class Creature {
@@ -12,6 +14,9 @@ public class Creature {
 	protected int def;
 	protected boolean dead;
 	
+	
+	protected LinkedList<Item> slots;
+	
 	public Creature() {
 		location = new Vector2();
 		dead = false;
@@ -21,4 +26,6 @@ public class Creature {
 		return location;
 	}
 
+	public void addItem(Item item) {
+	}
 }

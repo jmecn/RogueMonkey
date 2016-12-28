@@ -4,10 +4,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -16,12 +12,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import net.jmecn.rogue.core.Game;
-import net.jmecn.rogue.core.NanoTimer;
-import net.jmecn.rogue.core.Service;
 import net.jmecn.rogue.view.GameView;
 import net.jmecn.rogue.view.InputListener;
 
-public class Main implements Runnable {
+public class Main {
 
 	static Logger logger = LoggerFactory.getLogger(Main.class);
 
@@ -31,28 +25,17 @@ public class Main implements Runnable {
 	}
 
 	private boolean started;
-	private boolean enabled;
 
-	private List<Service> services;
-
-	private NanoTimer timer;
 	private Game game;
 	private GameView view;
 	private InputListener listener;
 
-	private ExecutorService exec;
-
 	public Main() {
-		timer = new NanoTimer();
 		game = new Game();
-		view = new GameView();
+		view = new GameView(game);
 
-		listener = new InputListener();
+		listener = new InputListener(game, view);
 		view.addKeyListener(listener);
-
-		services = new ArrayList<Service>();
-		services.add(view);
-		services.add(listener);
 	}
 
 	private void createFrame() {
@@ -76,16 +59,6 @@ public class Main implements Runnable {
 			public void windowClosing(WindowEvent e) {
 				stop();
 			}
-
-			@Override
-			public void windowActivated(WindowEvent e) {
-				enabled = true;
-			}
-
-			@Override
-			public void windowDeactivated(WindowEvent e) {
-				enabled = false;
-			}
 		});
 
 		// 窗口居中
@@ -104,21 +77,10 @@ public class Main implements Runnable {
 			return;
 		}
 
-		// 顺序初始化所有服务
-		int len = services.size();
-		for (int i = 0; i < len; i++) {
-			Service s = services.get(i);
-			s.initialize(game);
-		}
-
 		// 创建窗口
 		createFrame();
 
-		// 启动主线程
-		exec = Executors.newFixedThreadPool(1);
-		exec.execute(this);
 		started = true;
-		enabled = true;
 		
 		logger.info("开始游戏");
 	}
@@ -128,32 +90,9 @@ public class Main implements Runnable {
 			return;
 		}
 
-		// 关闭主线程
-		exec.shutdown();
-		exec = null;
-		started = false;
-		enabled = false;
-
-		// 逆序清理所有的服务
-		int len = services.size();
-		for (int i = len - 1; i >= 0; i--) {
-			Service s = services.get(i);
-			s.terminate(game);
-		}
 		logger.info("游戏结束");
+		
+		System.exit(0);
 	}
 
-	@Override
-	public void run() {
-		while (started) {
-			timer.update();
-			if (enabled) {
-				int len = services.size();
-				for (int i = 0; i < len; i++) {
-					Service s = services.get(i);
-					s.update(timer.getTimePerFrame());
-				}
-			}
-		}
-	}
 }

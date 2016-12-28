@@ -15,6 +15,7 @@ public class Map {
 
 	// map data
 	int[][] map;
+	int[][] explored;
 
 	List<Creature> creatures;
 	
@@ -22,6 +23,11 @@ public class Map {
 		this.width = width;
 		this.height = height;
 		this.map = new int[height][width];
+		this.explored = new int[height][width];
+		
+		for (int y = 0; y < height; y++)
+			for (int x = 0; x < width; x++)
+				explored[y][x] = 0;
 		
 		creatures = new ArrayList<Creature>();
 	}
@@ -51,6 +57,20 @@ public class Map {
 			return -1;
 	}
 
+	public void setExplored(int x, int y) {
+		if (contains(x, y)) {
+			explored[y][x] = 1;
+		}
+	}
+	
+	public boolean isExplored(int x, int y) {
+		if (contains(x, y)) {
+			return explored[y][x] == 1;
+		} else {
+			return false;
+		}
+	}
+	
 	/**
 	 * Fill the map with a tile
 	 * @param tile

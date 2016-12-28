@@ -15,14 +15,16 @@ public enum Tileset {
 	Grass,
 	Dirt,
 	Moss,
-	Tree,
+	Tree(32, 32, false),
+	Mage(32, 576),
+	Skeleton(64, 704),
 	;
 	
 	public final static int WIDTH = 32;
 	public final static int HEIGHT = 32;
 	
-	int x, y;
-	boolean passable;
+	public int x, y;
+	public boolean passable;
 	
 	private Tileset() {
 		this.x = y = 0;

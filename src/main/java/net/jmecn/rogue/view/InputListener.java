@@ -4,14 +4,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import net.jmecn.rogue.core.Game;
-import net.jmecn.rogue.core.Service;
 import net.jmecn.rogue.math.Vector2;
 
-public class InputListener implements KeyListener, Service {
+public class InputListener implements KeyListener {
 
 	private Game game;
+	private GameView view;
 	
-	public InputListener() {
+	public InputListener(Game game, GameView view) {
+		this.game = game;
+		this.view = view;
 	}
 
 	@Override
@@ -51,23 +53,11 @@ public class InputListener implements KeyListener, Service {
 			// move east
 			break;
 		}
+		
+		view.repaint();
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {}
-
-	@Override
-	public void initialize(Game game) {
-		this.game = game;
-	}
-
-	@Override
-	public void update(float tpf) {
-		
-	}
-
-	@Override
-	public void terminate(Game game) {
-	}
 
 }

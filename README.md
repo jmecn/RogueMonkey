@@ -91,6 +91,7 @@ There are different types of maps, they are:
 ### Ring
 ### Gem
 ### Food
+### Drink
 ### Scroll
 ### Potion
 ### Junk

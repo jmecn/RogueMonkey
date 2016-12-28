@@ -3,13 +3,15 @@ package net.jmecn.rogue.entity;
 public enum ItemTypes {
 	Weapon,
 	Shield,
-	Armor,
+	Helmet,
+	Armour,
 	Boots,
 	Ring,
-	Neckless,
+	Amulet,
 	Gem,
 	Scroll,
 	Food,
 	Drink,
+	Potion,
 	Junk;
 }
