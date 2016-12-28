@@ -13,7 +13,7 @@ public class Player extends Creature {
 		maxHearth = 100;
 		gold = 0;
 		level = 1;
-		viewRadius = 4;
+		viewRadius = 3;
 	}
 	
 	public void addGold(int amount) {

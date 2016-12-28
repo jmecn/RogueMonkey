@@ -37,7 +37,7 @@ public class MapFactory {
 		mapCreators.add(new DungeonYan(width, height));
 		mapCreators.add(new DungeonHauberk(width, height));
 		mapCreators.add(new DungeonTyrant(width, height));
-		mapCreators.add(new Maze(width/4, height/4));
+		mapCreators.add(new Maze(width, height));
 		mapCreators.add(new Building(width, height));
 		mapCreators.add(new CityLeafVenation(width, height));
 		creatorCnt= mapCreators.size();

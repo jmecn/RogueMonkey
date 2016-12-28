@@ -2,8 +2,8 @@ package net.jmecn.rogue.map;
 
 import static net.jmecn.rogue.core.Direction.*;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.jmecn.rogue.core.Direction;
 import net.jmecn.rogue.core.Map;
@@ -17,7 +17,7 @@ import net.jmecn.rogue.core.Tile;
  */
 public class Maze extends MapCreator {
 
-	static Logger logger = Logger.getLogger(Maze.class.getName());
+	static Logger logger = LoggerFactory.getLogger(Maze.class);
 	
 	protected class Point {
 		int x;
@@ -50,18 +50,22 @@ public class Maze extends MapCreator {
 	private static int ROAD_SIZE = 4;
 	
 	public Maze(int width, int height) {
-		super("creator.maze", width * ROAD_SIZE + 1, height * ROAD_SIZE + 1);
-		this.cellCols = width;
-		this.cellRows = height;
+		super("creator.maze", (width/ROAD_SIZE) * ROAD_SIZE + 1, (height/ROAD_SIZE) * ROAD_SIZE + 1);
+		this.cellCols = width/ROAD_SIZE;
+		this.cellRows = height/ROAD_SIZE;
+		this.width = cellCols * ROAD_SIZE + 1;
+		this.height = cellRows * ROAD_SIZE + 1;
+		
+		logger.info("width={} height={}", this.width, this.height);
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		this.map = new Map(width * ROAD_SIZE + 1, height * ROAD_SIZE + 1);
+		this.cellCols = width/ROAD_SIZE;
+		this.cellRows = height/ROAD_SIZE;
+		this.map = new Map(cellCols * ROAD_SIZE + 1, cellRows * ROAD_SIZE + 1);
 		this.width = cellCols * ROAD_SIZE + 1;
 		this.height = cellRows * ROAD_SIZE + 1;
-		this.cellCols = width;
-		this.cellRows = height;
 		initRand();
 		initialze();
 	}
@@ -100,11 +104,18 @@ public class Maze extends MapCreator {
 		
 		// placeStairs
 		
-		map.set(ROAD_SIZE/2, ROAD_SIZE/2, Tile.UpStairs);
+		int x = nextInt(cellCols);
+		int y = nextInt(cellRows);
+		map.set(x * ROAD_SIZE + ROAD_SIZE/2, y * ROAD_SIZE + ROAD_SIZE/2, Tile.UpStairs);
 		
-		int x = cellCols * ROAD_SIZE;
-		int y = cellRows * ROAD_SIZE;
-		map.set(x+ ROAD_SIZE/2, y+ROAD_SIZE/2, Tile.DownStairs);
+		int x2 = nextInt(cellCols);
+		int y2 = nextInt(cellRows);
+		while(x == x2 && y == y2) {
+			x2 = nextInt(cellCols);
+			y2 = nextInt(cellRows);
+		}
+		
+		map.set(x2 * ROAD_SIZE + ROAD_SIZE/2, y2 * ROAD_SIZE + ROAD_SIZE/2, Tile.DownStairs);
 	}
 	
 	public void buildMaze() {
@@ -138,7 +149,7 @@ public class Maze extends MapCreator {
 				break;
 			default:
 				c2 = null;
-				logger.log(Level.WARNING, "Unknown direction:" + dir);
+				logger.warn("Unknown direction:{}", dir);
 				break;
 			}
 			

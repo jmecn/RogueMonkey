@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import net.jmecn.rogue.core.Tileset;
 import net.jmecn.rogue.core.Game;
 import net.jmecn.rogue.core.Map;
-import net.jmecn.rogue.core.Tile;
 
 import static net.jmecn.rogue.core.Tile.*;
 
@@ -38,8 +37,6 @@ public class GameView extends Canvas {
 
 	private BufferedImage buffer;
 	private BufferedImage atlas;
-
-	private float fps = 60;
 
 	public GameView(Game game) {
 		this.setSize(new Dimension(CanvasSize.x, CanvasSize.y));
@@ -176,7 +173,7 @@ public class GameView extends Canvas {
 		
 		g.setFont(new Font(Font.MONOSPACED, Font.PLAIN, 32));
 		g.setColor(Color.WHITE);
-		g.drawString("FPS:" + (int) fps, 10, 32);
+		g.drawString("Level:" + game.getLevel(), 10, 32);
 	}
 
 	private void drawMinimap(Graphics2D g) {
@@ -187,8 +184,8 @@ public class GameView extends Canvas {
 		Vector2 vec = new Vector2();
 		vec.set(player.getLocation());
 
-		int radius = 10;
-		int size = 8;
+		int radius = 16;
+		int size = 6;
 		int locX = 600;
 		int locY = 10;
 		
@@ -210,7 +207,6 @@ public class GameView extends Canvas {
 					continue;
 				}
 
-				boolean canBeSeen = game.isVisible(x, y);
 				boolean hasExplored = map.isExplored(x, y);
 				if (!hasExplored) {
 					continue;

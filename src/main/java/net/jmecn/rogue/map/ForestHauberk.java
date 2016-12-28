@@ -182,15 +182,6 @@ public class ForestHauberk extends MapCreator {
 		
 		// make wall
 		erode(10000, Floor, Wall);
-
-		// Plant trees
-		for (int y = 0; y < height; y++) {
-			for (int x = 0; x < width; x++) {
-				if (map.get(x, y) == Wall) {
-					map.set(x, y, Tree);
-				}
-			}
-		}
 	}
 
 	/// Randomly turns some [wall] tiles into [floor] and vice versa.

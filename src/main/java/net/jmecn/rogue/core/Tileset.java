@@ -6,7 +6,7 @@ public enum Tileset {
 	Floor(0,0),
 	Wall(64, 64, false),
 	Stone(96, 64, false),
-	Corridor(128, 96),
+	Corridor(0, 0),
 	Door(192, 64),
 	UpStairs(192, 32),
 	DownStairs(160, 32),

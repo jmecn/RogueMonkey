@@ -30,6 +30,10 @@ public class Game {
 		level = 0;
 		downLevel();
 	}
+	
+	public int getLevel() {
+		return level;
+	}
 
 	public void downLevel() {
 		level++;
@@ -126,6 +130,10 @@ public class Game {
 		// check view distance
 		int r = player.getViewRadius();
 		if (dx > r || dy > r) {
+			return false;
+		}
+		
+		if (dx == r && dy == r) {
 			return false;
 		}
 
