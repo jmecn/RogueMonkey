@@ -2,8 +2,32 @@ package net.jmecn.rogue.entity;
 
 public class Item {
 
-	private ItemTypes type;
-
+	// Item types
+	public final static int Weapon = 0;
+	public final static int Shield = 1;
+	public final static int Helmet = 2;
+	public final static int Armour = 3;
+	public final static int Boots = 4;
+	public final static int Ring = 5;
+	public final static int Amulet = 6;
+	public final static int Gem = 7;
+	public final static int Scroll = 8;
+	public final static int Food = 9;
+	public final static int Drink = 10;
+	public final static int Potion = 11;
+	public final static int Junk = 12;
+	
+	// Item
+	public final static int WOOD = 1;
+	public final static int IRON = 2;
+	public final static int WOOD_SHIELD = 3;
+	public final static int WOOD_SWORDS = 4;
+	public final static int IRON_SWORDS = 5;
+	
+	Recipe recipe = null;
+	
+	private int id;
+	private int type;
 	private String name;
 	private int atk;
 	private int def;
@@ -19,7 +43,8 @@ public class Item {
 	private Creature owner = null;
 	
 	public Item() {
-		type = ItemTypes.Junk;
+		id = 0;
+		type = Junk;
 		name = "Unknown";
 		atk = 0;
 		def = 0;
@@ -30,7 +55,8 @@ public class Item {
 		stackCount = 0;
 	}
 
-	public Item(ItemTypes type, String name, int atk, int def, int hp, int weight, int value) {
+	public Item(int id, int type, String name, int atk, int def, int hp, int weight, int value) {
+		this.id = id;
 		this.type = type;
 		this.name = name;
 		this.atk = atk;
@@ -43,7 +69,8 @@ public class Item {
 		this.stackCount = 0;
 	}
 	
-	public Item(ItemTypes type, String name, int atk, int def, int hp, int weight, int value, boolean stackable, int stackCount) {
+	public Item(int id, int type, String name, int atk, int def, int hp, int weight, int value, boolean stackable, int stackCount) {
+		this.id = id;
 		this.type = type;
 		this.name = name;
 		this.atk = atk;
@@ -55,7 +82,11 @@ public class Item {
 		this.stackCount = stackCount;
 	}
 
-	public ItemTypes getType() {
+	public int getID() {
+		return id;
+	}
+	
+	public int getType() {
 		return type;
 	}
 

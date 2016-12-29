@@ -20,6 +20,22 @@ Each hunger and thirst level counts as 360 turns.
 Hunger can be managed by eating.
 Thirst can be managed by drinking.
 
+* Temperature
+
+High temperature leads to dehydration, which make you need more water.
+Low temperature causes hunger, you need to eat more food to keep warm.
+Body temperature can fluctuate if you are ill.
+
+
+### Repair
+
+Items have durability, you can pay blacksmith to repair you items. 
+There are 3 blacksmith here in this world:
+
+* Smith A: 90% success rate, cost 50% gold of item value to repair item.
+* Smith B: 95% success rate, cost 200% gold of item value to repair item.
+* Smith C: 98% success rate, cost 1000% gold of item value to repair item.
+
 ### Aging
 
 Weapon/Shield/Armour can aging up to Lv10. Each level cost different gems and money.
@@ -38,7 +54,17 @@ Weapon/Shield/Armour can aging up to Lv10. Each level cost different gems and mo
 +10 20%
 
 ### Craft
+
 You can find different materials in different maps, they can be used to craft items.
+
+* Cloth
+* Wood
+* Leather
+* Stone
+* Iron
+* Steel
+* Mithral
+* Gold
 
 ### Talent
 There are 6 types of talent, but player can only learn up to 4 talent in a game.

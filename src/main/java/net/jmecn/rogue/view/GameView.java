@@ -37,7 +37,9 @@ public class GameView extends Canvas {
 
 	private BufferedImage buffer;
 	private BufferedImage atlas;
-
+	
+	private BufferedImage mapBackground;
+	
 	public GameView(Game game) {
 		this.setSize(new Dimension(CanvasSize.x, CanvasSize.y));
 		this.setPreferredSize(new Dimension(CanvasSize.x, CanvasSize.y));
@@ -47,7 +49,8 @@ public class GameView extends Canvas {
 		local = new Vector2();
 		
 		this.game = game;
-		atlas = AssetFactory.loadImage("Tiles/fantasy-tileset.png");
+		atlas = AssetFactory.loadImage("Tiles/tiles.png");
+		mapBackground = AssetFactory.loadImage("gui/map_background.png");
 	}
 
 	private void chaseCamera() {
@@ -135,7 +138,6 @@ public class GameView extends Canvas {
 					drawTile(g, vec, ts);
 				} else {
 					g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, 0.3f));// 1.0f为透明度
-																								// ，值从0-1.0，依次变得不透明
 					drawTile(g, vec, ts);
 					g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER));
 				}
@@ -186,22 +188,19 @@ public class GameView extends Canvas {
 
 		int radius = 16;
 		int size = 6;
-		int locX = 600;
+		int locX = 580;
 		int locY = 10;
 		
 		int width = size * (radius * 2 + 1);
-		g.setColor(Color.BLACK);
-		g.fillRect(locX, locY, width + 5, width + 5);
-		g.setColor(Color.WHITE);
-		g.drawRect(locX, locY, width + 5, width + 5);
+		g.drawImage(mapBackground, locX, locY, locX+width+9, locY+width+9, 0, 0, 64, 64, null);
 		
 		int sx = vec.x - radius;
 		int sy = vec.y - radius;
 		int ex = vec.x + radius;
 		int ey = vec.y + radius;
 		
-		for (int y = sy, py = locY+3; y <= ey; y++, py += size ) {
-			for (int x = sx, px = locX+3; x <= ex; x++, px += size) {
+		for (int y = sy, py = locY+5; y <= ey; y++, py += size ) {
+			for (int x = sx, px = locX+5; x <= ex; x++, px += size) {
 				
 				if (!map.contains(x, y) || map.get(x, y) == Unused) {
 					continue;
@@ -217,6 +216,8 @@ public class GameView extends Canvas {
 				switch (tile) {
 				case Floor:
 				case Corridor:
+				case Dirt:
+				case Moss:
 					g.setColor(Color.WHITE);
 					break;
 				case Wall:
@@ -237,6 +238,9 @@ public class GameView extends Canvas {
 				g.fillRect(px, py, size, size);
 			}
 		}
+		
+		g.setColor(Color.BLUE);
+		g.fillRect(size * radius + 5 + locX, size * radius + 5 + locY, size, size);
 	}
 	
 	private void drawTile(Graphics g, Vector2 vec, Tileset ts) {

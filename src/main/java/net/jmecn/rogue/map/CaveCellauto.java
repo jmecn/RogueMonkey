@@ -64,6 +64,17 @@ public class CaveCellauto extends MapCreator {
 		
 		placeStairs(UpStairs);
 		placeStairs(DownStairs);
+		
+		
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				if (map.get(x, y) == Floor) {
+					map.set(x, y, Dirt);
+				} else if (map.get(x, y) == Wall) {
+					map.set(x, y, Stone);
+				}
+			}
+		}
 	}
 
 	private void placeStairs(int tile) {
