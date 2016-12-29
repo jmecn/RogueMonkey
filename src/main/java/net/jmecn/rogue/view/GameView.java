@@ -218,6 +218,7 @@ public class GameView extends Canvas {
 				case Corridor:
 				case Dirt:
 				case Moss:
+				case Grass:
 					g.setColor(Color.WHITE);
 					break;
 				case Wall:

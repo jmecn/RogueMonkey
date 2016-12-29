@@ -48,18 +48,20 @@ public class DungeonTyrant extends MapCreator {
 			}
 		}
 
-		for (int y=0; y<map.getHeight(); y++) {
-			for (int x=0; x<map.getWidth(); x++) {
-				if (map.get(x, y) == Corridor) {
-					map.set(x, y, Floor);
-				}
-			}
-		}
 		if (!makeStairs(UpStairs))
 			logger.log(Level.WARNING, "Unable to place up stairs.");
 
 		if (!makeStairs(DownStairs))
 			logger.log(Level.WARNING, "Unable to place down stairs.");
+		
+		
+		for (int y=0; y<map.getHeight(); y++) {
+			for (int x=0; x<map.getWidth(); x++) {
+				if (map.get(x, y) == Corridor) {
+					map.set(x, y, Dirt);
+				}
+			}
+		}
 	}
 
 	public void setMaxFeatures(int maxFeatures) {

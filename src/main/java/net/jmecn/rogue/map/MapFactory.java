@@ -55,7 +55,7 @@ public class MapFactory {
 		creator.initialze();
 		creator.create();
 		
-		logger.debug("Create map with : {}", creator);
+		logger.debug("Creator: {}", creator);
 		return creator.getMap();
 	}
 	
