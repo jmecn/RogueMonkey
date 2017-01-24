@@ -27,5 +27,16 @@ public class Player extends Creature {
 	public void addItem(Item item) {
 		slots.add(item);
 	}
-	
+
+	public boolean ongoingQuest(int id) {
+		return true;
+	}
+	public void attack(Monster monster) {
+		
+		//
+		
+		if (monster.hp <= 0) {
+			
+		}
+	}
 }

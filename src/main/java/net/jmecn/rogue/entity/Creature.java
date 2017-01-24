@@ -27,7 +27,26 @@ public class Creature {
 		return location;
 	}
 
+	/**
+	 * 检查背包中道具数量
+	 * @param id
+	 * @param count
+	 * @return
+	 */
+	public boolean checkItemCount(int id, int count) {
+		int sum = 0;
+		
+		return (sum >= count);
+	}
+	
 	public void addItem(Item item) {
+	}
+	
+	public void addItem(Item item, int count) {
+	}
+	
+	public void removeItem(Item item, int count) {
+		
 	}
 	
 	public List<Item> getItems() {
