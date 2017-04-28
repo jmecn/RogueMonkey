@@ -8,50 +8,60 @@ This is a roguelike game, also a survive game.
 ### Basic
 
 * Hearth
+
 Player die when hp = 0
 
 * Hunger & Thirst
+
 Player die when hunger or thirst = 0
 
 Hunger track: Famished, Starving, Hungry, Not Hungry, Satiated, Bloated, Choking. 
+
 Thirst track: Parched, Dehydrated, Thirsty, Not Thirsty, Satiated, Hydrated, Drenched. 
 
 Each hunger and thirst level counts as 360 turns.
+
 Hunger can be managed by eating.
+
 Thirst can be managed by drinking.
 
 * Temperature
 
 High temperature leads to dehydration, which make you need more water.
+
 Low temperature causes hunger, you need to eat more food to keep warm.
+
 Body temperature can fluctuate if you are ill.
 
 
 ### Repair
 
 Items have durability, you can pay blacksmith to repair you items. 
+
 There are 3 blacksmith here in this world:
 
 * Smith A: 90% success rate, cost 50% gold of item value to repair item.
+
 * Smith B: 95% success rate, cost 200% gold of item value to repair item.
+
 * Smith C: 98% success rate, cost 1000% gold of item value to repair item.
 
 ### Aging
 
 Weapon/Shield/Armour can aging up to Lv10. Each level cost different gems and money.
 
-    Money = Item Price * Aging Level
+`Money = Item Price * Aging Level`
 
-+1 100%
-+2 100%
-+3 90%
-+4 80%
-+5 70%
-+6 60%
-+7 50%
-+8 40%
-+9 30%
-+10 20%
+    +1 100%
+    +2 100%
+    +3 90%
+    +4 80%
+    +5 70%
+    +6 60%
+    +7 50%
+    +8 40%
+    +9 30%
+    +10 20%
 
 ### Craft
 
@@ -74,21 +84,26 @@ There are 6 types of talent, but player can only learn up to 4 talent in a game.
  * Dark Vision: +1 Field of view
  * Hungry: can eat uncooked food
  * Silent Move
+ 
 * Combat
  * Heroic charge: +1 move steps before attack a target
  * Blade flurry: 1 more attack chance(N%)
  * Combat master: +1 melee damage
+ 
 * Archer
  * Aimed Shot: +1 Hit
  * Quick Shot: 1 more move before short
  * Archer master: +1 ranged damage
+ 
 * Craft
  * Find more chance to find materials
  * Can see the recipes
+ 
 * Alchemist
  * Literacy
  * Can make potions
  * +50% effect when use potion
+ 
 * Cooker
  * Cooker food
  * +50% hungry & thirsty when eat food
